@@ -26,16 +26,16 @@ function loadAudio(~, ~)
 
     coeffs = mfcc_(y);
      % 选择要显示的特征类型（1:静态, 2:一阶差分, 3:二阶差分）
-    featureType = 1;  % 修改此值选择不同特征
-
-    switch featureType
-        case 1
-            coeffs = coeffs(:, 1);  % 静态系数
-        case 2
-            coeffs = coeffs(:, 14); % 一阶差分
-        case 3
-            coeffs = coeffs(:, size(coeffs, 2)); % 二阶差分
-    end
+    % featureType = 1;  % 修改此值选择不同特征
+    % 
+    % switch featureType
+    %     case 1
+    %         coeffs = coeffs(:, 1);  % 静态系数
+    %     case 2
+    %         coeffs = coeffs(:, 14); % 一阶差分
+    %     case 3
+    %         coeffs = coeffs(:, size(coeffs, 2)); % 二阶差分
+    % end
     % 在指定的坐标轴 (mfccAx) 上绘制 MFCC 曲线
     axes(mcffAx);  % 激活指定的坐标轴
     cla(mcffAx);   % 清除当前坐标轴上的内容
