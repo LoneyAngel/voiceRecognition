@@ -6,13 +6,12 @@ classes = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'k', 'g', 'x', 'z',
 len = length(classes); % 获取类别数量
 
 % 初始化 samples
-samples = cell(len, 1); % 预分配 cell 数组
+samples = cell(len, 1); % 动态扩展数组
 % 遍历类别和序号
 for i = 1:len
     j = 1;
     count=1;
     while j
-        %while j <= 10
         fname = sprintf('data\\%s%d.wav', classes{i}, j-1);
         if exist(fname, 'file') ~= 2
             break;
@@ -27,7 +26,7 @@ for i = 1:len
 
         % 调用端点检测函数 vad
         try
-            [start_idx, end_idx] = vad(audio_data, fs);
+            [start_idx, end_idx] = vad(audio_data);
             audio_data = audio_data(start_idx:end_idx); % 裁剪有效语音段
         catch
             fprintf('VAD处理失败: %s\n', fname);

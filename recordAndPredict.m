@@ -1,5 +1,5 @@
 function recordAndPredict(~, ~)
-    % % DTW + KNN 声音识别按钮功能
+    % % GMM + HMM 声音识别按钮功能
     global resultText filep % 获取全局音频文件路径
     
     % ==== 步骤1：加载预训练模型 ====
@@ -21,9 +21,9 @@ function recordAndPredict(~, ~)
     
     % ==== 步骤3：特征提取 ====
     try
-        [x1, x2] = vad(y, fs);                % 获取有效段采样点索引
+        [x1, x2] = vad(y);                % 获取有效段采样点索引
         y_vad = y(x1:x2);                     % 截取有效语音段
-        mfccs = mfcc_(y_vad);             % 仅处理有效语音段
+        mfccs = mfcc(y_vad);             % 对有效语音段进行mfcc特征提取
     catch
         errordlg('特征提取失败！','处理错误');
         return;
@@ -33,9 +33,9 @@ function recordAndPredict(~, ~)
     try
         scores = zeros(1,16);
         for i = 1:16
-            scores(i) = viterbi(hmm{i}, mfccs);  % 需要viterbi函数
+            scores(i) = viterbi(hmm{i}, mfccs);  % 使用模型进行判断
         end
-        [~, pred] = max(scores);
+        [~, pred] = max(scores);%返回最大概率者
     catch
         errordlg('识别过程出错！','算法错误');
         return;

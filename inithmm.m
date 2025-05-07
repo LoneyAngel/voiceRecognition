@@ -1,4 +1,4 @@
-%训练使用
+%初始化hmm模型参数
 function hmm = inithmm(samples, M)
 
 K = length(samples);	%语音样本数

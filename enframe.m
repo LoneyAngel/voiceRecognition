@@ -1,6 +1,5 @@
-%mfcc和原始图形的显示
-% enframe.m
-
+%将一维音频信号进行分帧
+%一维向量，帧长，帧移
 function f=enframe(x,win,inc) 
  
 nx=length(x); 

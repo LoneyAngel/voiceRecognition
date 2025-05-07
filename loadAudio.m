@@ -1,4 +1,4 @@
-%初始化上传的音频文件
+%初始化用户上传的音频文件
 function loadAudio(~, ~)
     % 获取 GUI 中的共享变量
     global waveformAx mcffAx currentAudio currentFs filep  file
@@ -24,7 +24,7 @@ function loadAudio(~, ~)
     plot((1:length(y)) / fs, y);
     title('原始语音');
 
-    coeffs = mfcc_(y);
+    coeffs = mfcc(y);
      % 选择要显示的特征类型（1:静态, 2:一阶差分, 3:二阶差分）
     % featureType = 1;  % 修改此值选择不同特征
     % 

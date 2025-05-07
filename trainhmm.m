@@ -1,4 +1,4 @@
-%训练时使用的函数
+%训练hmm模型
 function [hmm, pout] = trainhmm(samples, M)
 %输入:
 %  samples -- 样本结构
@@ -14,7 +14,7 @@ for k = 1:K
     if isfield(samples(k),'data') && ~isempty(samples(k).data)
         continue;
     else
-        samples(k).data = mfcc_(samples(k).wave);
+        samples(k).data = mfcc(samples(k).wave);
     end
 end
 

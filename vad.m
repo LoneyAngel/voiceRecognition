@@ -1,5 +1,5 @@
 %训练和预测使用的端点检测函数
-function [StartPoint, EndPoint] = vad(k, fs)
+function [StartPoint, EndPoint] = vad(k)
     % 预处理
     k = double(k)/max(abs(double(k))); % 归一化
 
@@ -31,7 +31,6 @@ function [StartPoint, EndPoint] = vad(k, fs)
     % 端点检测
     Status = 0;
     StartPoint = 1;
-    EndPoint = length(zcr);
     HoldTime = 0;
     SilenceTime = 0;
 
@@ -71,11 +70,14 @@ function [StartPoint, EndPoint] = vad(k, fs)
     StartPoint = (StartPoint - 1) * FrameInc + 1;
     EndPoint = min(StartPoint + HoldTime * FrameInc - 1, length(k));
 end
-function frames = enframe(x, win_len, hop_len)
-    num_frames = floor((length(x)-win_len)/hop_len) + 1;
-    frames = zeros(num_frames, win_len);
-    for i = 1:num_frames
-        start = (i-1)*hop_len + 1;
-        frames(i,:) = x(start:start+win_len-1);
-    end
-end
+
+
+%如果enframe函数报错，可以将这部分取消注释
+% function frames = enframe(x, win_len, hop_len)
+%     num_frames = floor((length(x)-win_len)/hop_len) + 1;
+%     frames = zeros(num_frames, win_len);
+%     for i = 1:num_frames
+%         start = (i-1)*hop_len + 1;
+%         frames(i,:) = x(start:start+win_len-1);
+%     end
+% end

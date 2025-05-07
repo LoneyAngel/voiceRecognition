@@ -1,4 +1,5 @@
 %测试
+%以现有的数据和模型进行识别准确度的计算
 function hmm=test()
 clear;
 clc;
@@ -30,10 +31,10 @@ for i = 1:len
         
         % ==== 步骤3：特征提取 ====
         try
-            [x1, x2] = vad(y, fs);                % 获取有效段采样点索引
+            [x1, x2] = vad(y);                % 获取有效段采样点索引
             y_vad = y(x1:x2);                     % 截取有效语音段
             
-            mfccs = mfcc_(y_vad);             % 仅处理有效语音段
+            mfccs = mfcc(y_vad);             % 仅处理有效语音段
         catch
             errordlg('特征提取失败！','处理错误');
             j = j + 1;

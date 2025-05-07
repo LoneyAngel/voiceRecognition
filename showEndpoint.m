@@ -11,7 +11,7 @@ function showEndpoint(~, ~)
     fs = currentFs;
 
     % 进行端点检测
-    [x1,x2]=vad(y,fs);
+    [x1,x2]=vad(y);
     y_vad = y(x1:x2);
     % 显示端点检测结果
     axes(endpointAx);
